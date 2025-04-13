@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
 import './dashboard'
 import './error'
+import './performance'
 
 // 设置延迟时间，模拟网络请求
 Mock.setup({

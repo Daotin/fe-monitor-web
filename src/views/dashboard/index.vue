@@ -6,6 +6,7 @@ import { ElMessage } from 'element-plus'
 import StatCard from '../../components/dashboard/StatCard.vue'
 import ErrorTrendChart from '../../components/dashboard/ErrorTrendChart.vue'
 import ErrorList, { type ErrorItem } from '../../components/dashboard/ErrorList.vue'
+import TimeRangeSelector from '@/components/common/TimeRangeSelector.vue'
 
 const appStore = useAppStore()
 
@@ -104,6 +105,11 @@ const loadAllData = () => {
 	fetchErrorList()
 }
 
+// 设置时间范围
+const handleTimeRangeChange = (timeRange: TimeRange) => {
+	appStore.setTimeRange(timeRange)
+}
+
 // 监听时间范围变化，重新加载数据
 watch(
 	() => [appStore.appId, appStore.startTime, appStore.endTime],
@@ -126,6 +132,9 @@ onMounted(() => {
 
 <template>
 	<div class="dashboard-container">
+		<el-row class="time-filter">
+			<TimeRangeSelector @change="handleTimeRangeChange" />
+		</el-row>
 		<!-- 核心指标卡片 -->
 		<el-row :gutter="20" class="stat-cards">
 			<el-col :xs="24" :sm="12" :md="6">
@@ -178,6 +187,10 @@ onMounted(() => {
 <style scoped>
 .dashboard-container {
 	padding: 20px;
+}
+
+.time-filter {
+	margin-bottom: 20px;
 }
 
 .stat-cards {

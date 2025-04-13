@@ -54,6 +54,24 @@ export interface ResourceError {
 	timestamp: string
 }
 
+export interface SourceMapFile {
+	id: string
+	appId: string
+	fileName: string
+	originalFileName: string
+	version: string
+	size: number
+	uploadTime: string
+	status: 'active' | 'inactive'
+}
+
+export interface UploadSourceMapResponse {
+	success: boolean
+	id: string
+	fileName: string
+	uploadTime: string
+}
+
 export interface EventDetail {
 	id: string
 	appId: string
@@ -141,14 +159,32 @@ export function getResourceErrors(appId: string, startTime: string, endTime: str
 	return get<ResourceError[]>('/performance/resource-errors', { appId, startTime, endTime, limit })
 }
 
-// 上传SourceMap文件
-export function uploadSourceMap(appId: string, mapFile: File) {
-	const formData = new FormData()
-	formData.append('mapFile', mapFile)
+// 获取SourceMap文件列表
+export function getSourceMaps(appId: string) {
+	return get<SourceMapFile[]>('/sourcemaps', { appId })
+}
 
-	return post<{ message: string; appId: string; uploadedAt: string }>(`/sourcemaps/${appId}`, formData, {
+// 上传SourceMap文件
+export function uploadSourceMap(appId: string, file: File, version: string) {
+	const formData = new FormData()
+	formData.append('file', file)
+	formData.append('appId', appId)
+	formData.append('version', version)
+
+	return post<UploadSourceMapResponse>('/sourcemaps/upload', formData, {
 		headers: {
 			'Content-Type': 'multipart/form-data',
 		},
 	})
+}
+
+// 删除SourceMap文件
+export function deleteSourceMap(fileId: string) {
+	return post<{ success: boolean; id: string }>(
+		`/sourcemaps/${fileId}`,
+		{},
+		{
+			method: 'DELETE',
+		},
+	)
 }

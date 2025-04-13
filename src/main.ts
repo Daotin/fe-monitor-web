@@ -9,6 +9,9 @@ import App from './App.vue'
 import './style.css'
 import 'element-plus/dist/index.css'
 
+// 导入Mock服务
+import './mock'
+
 const app = createApp(App)
 
 // 注册Element Plus图标

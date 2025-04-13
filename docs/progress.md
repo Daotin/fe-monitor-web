@@ -5,41 +5,48 @@
 ### 完成内容
 
 1. **依赖安装**
-   - 安装了Element Plus、Vue Router、Axios、ECharts、Pinia、rrweb-player等核心依赖
-   - 安装了Element Plus图标库
+
+   - 安装了 Element Plus、Vue Router、Axios、ECharts、Pinia、rrweb-player 等核心依赖
+   - 安装了 Element Plus 图标库
 
 2. **项目目录结构创建**
-   - 创建了router、store、api、utils、views、components等目录
+
+   - 创建了 router、store、api、utils、views、components 等目录
    - 为各个功能模块创建了对应的视图目录
 
 3. **路由配置**
+
    - 创建了路由配置文件，定义了主要页面路由
    - 配置了路由懒加载，提高应用性能
    - 设置了路由元数据，包括标题和图标信息
 
 4. **状态管理**
-   - 使用Pinia创建了全局状态管理
-   - 实现了应用ID和时间范围的状态管理
+
+   - 使用 Pinia 创建了全局状态管理
+   - 实现了应用 ID 和时间范围的状态管理
    - 提供了时间范围计算功能
 
-5. **API服务**
-   - 封装了Axios请求库
+5. **API 服务**
+
+   - 封装了 Axios 请求库
    - 创建了请求和响应拦截器
-   - 定义了API接口函数和类型
+   - 定义了 API 接口函数和类型
 
 6. **工具函数**
+
    - 实现了日期格式化、时间差格式化等工具函数
    - 实现了文件大小格式化、字符串截断等辅助函数
    - 实现了防抖和节流函数
 
 7. **布局组件**
+
    - 创建了主布局组件（Layout）
    - 实现了侧边栏组件（Sidebar）
    - 实现了顶部导航栏组件（Header）
    - 实现了时间范围选择器组件（TimeRangeSelector）
 
 8. **基础页面**
-   - 创建了404页面
+   - 创建了 404 页面
    - 为各个功能模块创建了基本页面结构
 
 ### 技术栈
@@ -48,14 +55,49 @@
 - Vite 构建工具
 - Vue Router 路由管理
 - Pinia 状态管理
-- Element Plus UI组件库
-- Axios HTTP请求库
+- Element Plus UI 组件库
+- Axios HTTP 请求库
 - ECharts 图表库
 - rrweb-player 录屏回放
 
+## 第二阶段：概览页（Dashboard）开发（已完成）
+
+### 完成内容
+
+1. **Mock 数据服务**
+
+   - 安装并配置了 mockjs
+   - 创建了模拟 API 响应的 mock 数据
+   - 实现了核心统计指标、错误趋势和错误列表的模拟数据
+
+2. **核心组件开发**
+
+   - 实现了 StatCard 组件，用于展示核心指标
+   - 实现了 ErrorTrendChart 组件，集成 ECharts 展示错误趋势
+   - 实现了 ErrorList 组件，展示 Top 5 JS 错误
+
+3. **Dashboard 页面实现**
+
+   - 集成了上述组件，构建完整的概览页
+   - 实现了数据加载和错误处理
+   - 实现了响应式布局，适配不同屏幕尺寸
+   - 添加了加载状态和空数据处理
+
+4. **数据交互**
+   - 实现了时间范围变化时自动刷新数据
+   - 实现了错误列表项点击跳转到错误详情页
+
+### 技术要点
+
+- 使用 ECharts 实现数据可视化
+- 使用 Element Plus 的 Grid 系统实现响应式布局
+- 使用 Vue 3 的 Composition API 管理组件状态和逻辑
+- 使用 mockjs 模拟 API 数据，便于前端开发和测试
+
 ### 下一步计划
 
-进入第二阶段开发：概览页（Dashboard）的实现，包括：
-- 核心指标卡片组件
-- JS错误趋势图
-- Top 5 JS错误列表
+进入第三阶段开发：错误监控页面的实现，包括：
+
+- 错误列表组件
+- 错误筛选和排序功能
+- 错误详情页面

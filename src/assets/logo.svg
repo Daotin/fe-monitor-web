@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="60px" viewBox="0 0 200 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>前端监控</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="logo">
+            <rect id="bg" fill="#304156" x="0" y="0" width="200" height="60" rx="4"></rect>
+            <text id="前端监控" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="600" fill="#FFFFFF">
+                <tspan x="40" y="38">前端监控</tspan>
+            </text>
+            <path d="M20,20 L30,20 L30,40 L20,40 L20,20 Z" id="bar1" fill="#409EFF"></path>
+            <path d="M35,25 L45,25 L45,40 L35,40 L35,25 Z" id="bar2" fill="#67C23A"></path>
+            <path d="M50,15 L60,15 L60,40 L50,40 L50,15 Z" id="bar3" fill="#E6A23C"></path>
+        </g>
+    </g>
+</svg>

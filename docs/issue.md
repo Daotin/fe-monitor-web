@@ -76,3 +76,28 @@
 - 修改 mock 数据处理方式，确保返回的数据格式与组件期望的一致
 - 简化 URL 参数解析逻辑，因为在使用 axios 的 params 参数时，这些参数不会直接出现在 URL 中
 - 在返回数据前添加日志输出，便于调试和验证数据格式
+
+## 自动部署相关问题
+
+### 问题 1：GitHub Pages 部署路径问题
+
+**问题描述**：
+在使用 GitHub Pages 部署时，如果不配置 Vite 的 base 选项，会导致资源路径错误，页面无法正常加载。
+
+**解决方案**：
+在 `vite.config.ts` 中添加 `base` 配置，设置为仓库名称：
+
+```typescript
+export default defineConfig({
+	// ...其他配置
+	base: '/fe-monitor-web/',
+})
+```
+
+### 问题 2：GitHub Actions 权限问题
+
+**问题描述**：
+在使用 GitHub Actions 部署到 GitHub Pages 时，可能会遇到权限不足的问题。
+
+**解决方案**：
+确保仓库设置中已启用 GitHub Pages，并且 GitHub Actions 有写入权限。可以在仓库的 Settings > Actions > General > Workflow permissions 中设置为 "Read and write permissions"。

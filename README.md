@@ -4,6 +4,7 @@
 [![Vite](https://img.shields.io/badge/Vite-6.2-646cff)](https://vitejs.dev/)
 [![Element Plus](https://img.shields.io/badge/Element%20Plus-2.9-409eff)](https://element-plus.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178c6)](https://www.typescriptlang.org/)
+[![Deploy](https://github.com/yourusername/fe-monitor-web/actions/workflows/deploy.yml/badge.svg)](https://github.com/yourusername/fe-monitor-web/actions/workflows/deploy.yml)
 
 ## 项目介绍
 
@@ -89,6 +90,24 @@ npm run build
 ```bash
 npm run preview
 ```
+
+## 自动部署
+
+本项目使用 GitHub Actions 自动部署到 GitHub Pages。
+
+### 部署流程
+
+1. 当代码推送到 `main` 分支时，自动触发部署流程
+2. GitHub Actions 会执行以下步骤：
+   - 检出代码
+   - 设置 Node.js 环境
+   - 安装依赖
+   - 构建项目
+   - 部署到 GitHub Pages
+
+### 手动触发部署
+
+你也可以在 GitHub 仓库的 Actions 页面手动触发部署流程。
 
 ## 主要页面
 

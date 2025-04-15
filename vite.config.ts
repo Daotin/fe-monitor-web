@@ -10,4 +10,6 @@ export default defineConfig({
 			'@': '/src',
 		},
 	},
+	// 配置base，用于GitHub Pages部署
+	base: '/fe-monitor-web/',
 })

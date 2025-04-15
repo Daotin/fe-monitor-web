@@ -203,9 +203,36 @@
 - 使用 Element Plus 的 MessageBox 实现删除确认
 - 使用 Less 预处理器实现更灵活的样式管理
 
+## 第六阶段：自动部署功能实现（已完成）
+
+### 完成内容
+
+1. **GitHub Actions 工作流配置**
+
+   - 创建了 `.github/workflows` 目录
+   - 创建了 `deploy.yml` 文件，配置自动部署流程
+   - 配置了触发条件（推送到 main 分支或手动触发）
+
+2. **Vite 配置更新**
+
+   - 在 `vite.config.ts` 中添加了 `base` 配置，支持 GitHub Pages 部署
+   - 设置了正确的资源路径前缀
+
+3. **文档更新**
+
+   - 在 README.md 中添加了部署状态徽章
+   - 添加了自动部署相关说明
+   - 在 issue.md 中记录了部署过程中可能遇到的问题和解决方案
+
+### 技术要点
+
+- 使用 GitHub Actions 实现自动化部署
+- 使用 JamesIves/github-pages-deploy-action 实现到 GitHub Pages 的部署
+- 配置 Vite 的 base 选项支持子路径部署
+
 ### 下一步计划
 
-项目的五个主要页面已全部完成，下一步可以考虑：
+项目的五个主要页面和自动部署功能已全部完成，下一步可以考虑：
 
 - 完善项目文档
 - 添加单元测试

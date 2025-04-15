@@ -23,7 +23,7 @@ export default defineConfig({
 		// 启用/禁用CSS代码拆分
 		cssCodeSplit: true,
 		// 构建后是否生成source map文件
-		sourcemap: true,
+		sourcemap: false,
 		// 自定义底层的rollup打包配置
 		rollupOptions: {
 			output: {

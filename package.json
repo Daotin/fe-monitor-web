@@ -21,6 +21,7 @@
 	},
 	"devDependencies": {
 		"@types/mockjs": "^1.0.10",
+		"@types/node": "^22.14.1",
 		"@vitejs/plugin-vue": "^5.2.1",
 		"@vue/tsconfig": "^0.7.0",
 		"less": "^4.3.0",

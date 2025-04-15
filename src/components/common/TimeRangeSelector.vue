@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useAppStore, TimeRange } from '../../store/app'
+import { useAppStore, type TimeRange } from '../../store/app'
 
 // 定义事件
 const emit = defineEmits(['change'])

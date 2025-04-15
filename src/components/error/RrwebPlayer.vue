@@ -1,97 +1,104 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, computed, watch } from 'vue';
-import type { EventDetail } from '../../api';
+import { ref, onMounted, onBeforeUnmount, computed, watch } from 'vue'
+import type { EventDetail } from '../../api'
 
 // 定义组件属性
 interface Props {
-  data: EventDetail;
-  loading?: boolean;
+	data: EventDetail
+	loading?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  loading: false
-});
+	loading: false,
+})
 
 // 播放器容器引用
-const playerContainer = ref<HTMLDivElement | null>(null);
+const playerContainer = ref<HTMLDivElement | null>(null)
 // 播放器实例
-const playerInstance = ref<any>(null);
+const playerInstance = ref<any>(null)
 
 // 判断是否有录屏数据
 const hasRrwebData = computed(() => {
-  return props.data.payload.rrwebData && props.data.payload.rrwebData.length > 0;
-});
+	return props.data.payload.rrwebData && props.data.payload.rrwebData.length > 0
+})
 
 // 初始化播放器
 const initPlayer = async () => {
-  if (!hasRrwebData.value || !playerContainer.value) return;
+	if (!hasRrwebData.value || !playerContainer.value) return
 
-  try {
-    // 动态导入rrweb-player
-    const { Replayer } = await import('rrweb-player');
-    const { default: 'rrweb-player/dist/style.css' } = await import('rrweb-player/dist/style.css');
+	try {
+		// 动态导入rrweb-player
+		const rrwebPlayer = await import('rrweb-player')
+		// 导入CSS
+		await import('rrweb-player/dist/style.css')
 
-    // 销毁旧的播放器实例
-    if (playerInstance.value) {
-      playerInstance.value.destroy();
-      playerInstance.value = null;
-    }
+		const Replayer = rrwebPlayer.default
 
-    // 创建新的播放器实例
-    playerInstance.value = new Replayer({
-      target: playerContainer.value,
-      props: {
-        events: props.data.payload.rrwebData,
-        showController: true,
-        autoPlay: false,
-        width: playerContainer.value.clientWidth,
-        height: Math.min(window.innerHeight * 0.6, 600)
-      }
-    });
+		// 销毁旧的播放器实例
+		if (playerInstance.value) {
+			playerInstance.value.destroy()
+			playerInstance.value = null
+		}
 
-    console.log('rrweb播放器初始化成功');
-  } catch (error) {
-    console.error('初始化rrweb播放器失败:', error);
-  }
-};
+		// 创建新的播放器实例
+		playerInstance.value = new Replayer({
+			target: playerContainer.value,
+			props: {
+				events: props.data.payload.rrwebData as any,
+				showController: true,
+				autoPlay: false,
+				width: playerContainer.value.clientWidth,
+				height: Math.min(window.innerHeight * 0.6, 600),
+			},
+		})
+
+		console.log('rrweb播放器初始化成功')
+	} catch (error) {
+		console.error('初始化rrweb播放器失败:', error)
+	}
+}
 
 // 监听数据变化，重新初始化播放器
-watch(() => props.data, () => {
-  if (hasRrwebData.value) {
-    // 延迟初始化，确保DOM已更新
-    setTimeout(() => {
-      initPlayer();
-    }, 100);
-  }
-}, { deep: true });
+watch(
+	() => props.data,
+	() => {
+		if (hasRrwebData.value) {
+			// 延迟初始化，确保DOM已更新
+			setTimeout(() => {
+				initPlayer()
+			}, 100)
+		}
+	},
+	{ deep: true },
+)
 
 // 监听窗口大小变化，调整播放器大小
 const handleResize = () => {
-  if (playerInstance.value && playerContainer.value) {
-    playerInstance.value.updateConfig({
-      width: playerContainer.value.clientWidth,
-      height: Math.min(window.innerHeight * 0.6, 600)
-    });
-  }
-};
+	if (playerInstance.value && playerContainer.value) {
+		playerInstance.value.updateConfig({
+			width: playerContainer.value.clientWidth,
+			height: Math.min(window.innerHeight * 0.6, 600),
+		})
+	}
+}
 
 onMounted(() => {
-  if (hasRrwebData.value) {
-    initPlayer();
-  }
+	if (hasRrwebData.value) {
+		initPlayer()
+	}
 
-  window.addEventListener('resize', handleResize);
-});
+	window.addEventListener('resize', handleResize)
+})
 
 onBeforeUnmount(() => {
-  // 销毁播放器实例
-  if (playerInstance.value) {
-    playerInstance.value.destroy();
-    playerInstance.value = null;
-  }
+	// 销毁播放器实例
+	if (playerInstance.value) {
+		playerInstance.value.destroy()
+		playerInstance.value = null
+	}
 
-  window.removeEventListener('resize', handleResize);
-});
+	window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <template>

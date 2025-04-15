@@ -82,6 +82,7 @@ npm run dev
 ### 构建生产版本
 
 ```bash
+npm run build-only
 npm run build
 ```
 

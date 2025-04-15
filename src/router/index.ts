@@ -41,6 +41,12 @@ const routes: Array<RouteRecordRaw> = [
 				component: () => import('../views/settings/index.vue'),
 				meta: { title: '设置', icon: 'Setting' },
 			},
+			{
+				path: '/demo',
+				name: 'Demo',
+				component: () => import('../views/demo/index.vue'),
+				meta: { title: '错误采集演示', icon: 'Monitor' },
+			},
 		],
 	},
 	{

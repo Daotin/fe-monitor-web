@@ -4,11 +4,6 @@
 		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 		"skipLibCheck": true,
 		"allowSyntheticDefaultImports": true,
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["./src/*"],
-			"fe-monitor-sdk": ["./libs/fe-monitor-sdk/index.esm.js"]
-		},
 
 		/* Linting */
 		"strict": true,

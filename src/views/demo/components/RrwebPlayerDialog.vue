@@ -9,6 +9,14 @@
 		<div v-loading="loading">
 			<!-- 有录屏数据 -->
 			<template v-if="hasRrwebData">
+				<div class="record-info" v-if="recordInfo">
+					<p><strong>录制信息：</strong></p>
+					<p>开始时间：{{ formatTime(recordInfo.startTime) }}</p>
+					<p>结束时间：{{ formatTime(recordInfo.endTime) }}</p>
+					<p>持续时间：{{ formatDuration(recordInfo.duration) }}</p>
+					<p>事件数量：{{ recordInfo.eventsCount }}</p>
+				</div>
+
 				<div class="player-container-wrapper">
 					<div ref="playerContainer" class="player-container"></div>
 				</div>
@@ -59,9 +67,41 @@ const playerInstance = ref<any>(null)
 // 加载状态
 const loading = ref(false)
 
+// 录制信息
+const recordInfo = computed(() => {
+	if (!props.error) return null
+
+	return {
+		startTime: props.error.startTime,
+		endTime: props.error.endTime,
+		duration: props.error.duration,
+		eventsCount: props.error.eventsCount,
+	}
+})
+
+// 格式化时间
+const formatTime = (timestamp: number) => {
+	if (!timestamp) return '未知'
+	const date = new Date(timestamp)
+	return date.toLocaleString()
+}
+
+// 格式化持续时间
+const formatDuration = (duration: number) => {
+	if (!duration) return '未知'
+	const seconds = Math.floor(duration / 1000)
+	if (seconds < 60) {
+		return `${seconds}秒`
+	}
+	const minutes = Math.floor(seconds / 60)
+	const remainingSeconds = seconds % 60
+	return `${minutes}分${remainingSeconds}秒`
+}
+
 // 是否有录屏数据
 const hasRrwebData = computed(() => {
-	return props.error?.rrwebData && props.error.rrwebData.length > 0
+	console.log('检查录屏数据:', props.error)
+	return props.error?.events && props.error.events.length > 0
 })
 
 // 监听对话框可见性变化
@@ -96,17 +136,16 @@ const initPlayer = async () => {
 
 		const Replayer = rrwebPlayer.default
 
+		console.log('创建播放器，使用的录制数据:', props.error.events)
+
 		// 销毁旧的播放器实例
-		if (playerInstance.value) {
-			playerInstance.value.destroy()
-			playerInstance.value = null
-		}
+		destroyPlayer()
 
 		// 创建新的播放器实例
 		playerInstance.value = new Replayer({
 			target: playerContainer.value,
 			props: {
-				events: props.error.rrwebData,
+				events: props.error.events, // 使用新的数据结构中的events
 				showController: true,
 				autoPlay: false,
 				width: playerContainer.value.clientWidth,
@@ -126,18 +165,19 @@ const handleClose = () => {
 	dialogVisible.value = false
 
 	// 销毁播放器实例
+	destroyPlayer()
+}
+
+const destroyPlayer = () => {
 	if (playerInstance.value) {
-		playerInstance.value.destroy()
+		playerInstance.value.destroy?.()
 		playerInstance.value = null
 	}
 }
 
 // 组件卸载时清理资源
 onUnmounted(() => {
-	if (playerInstance.value) {
-		playerInstance.value.destroy()
-		playerInstance.value = null
-	}
+	destroyPlayer()
 })
 </script>
 
@@ -158,5 +198,17 @@ onUnmounted(() => {
 	color: #909399;
 	font-size: 14px;
 	margin-top: 10px;
+}
+
+.record-info {
+	margin-bottom: 20px;
+	padding: 15px;
+	background-color: #f8f9fa;
+	border-radius: 4px;
+	font-size: 14px;
+}
+
+.record-info p {
+	margin: 5px 0;
 }
 </style>

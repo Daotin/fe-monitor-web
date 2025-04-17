@@ -4,7 +4,7 @@
 [![Vite](https://img.shields.io/badge/Vite-6.2-646cff)](https://vitejs.dev/)
 [![Element Plus](https://img.shields.io/badge/Element%20Plus-2.9-409eff)](https://element-plus.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178c6)](https://www.typescriptlang.org/)
-[![Deploy](https://github.com/yourusername/fe-monitor-web/actions/workflows/deploy.yml/badge.svg)](https://github.com/yourusername/fe-monitor-web/actions/workflows/deploy.yml)
+[![Deploy](https://github.com/daotin/fe-monitor-web/actions/workflows/deploy.yml/badge.svg)](https://github.com/daotin/fe-monitor-web/actions/workflows/deploy.yml)
 
 ## 项目介绍
 
@@ -17,6 +17,15 @@
 - **性能概览**：展示 LCP、FCP 等核心性能指标，以及慢页面列表和资源错误列表
 - **SourceMap 管理**：上传和管理 SourceMap 文件，用于错误堆栈还原
 - **设置页面**：配置应用参数和监控选项
+- **错误采集演示**：演示错误上报，错误展示，sourcemap错误还原，rrweb录屏播放，用户行为栈展示功能。
+
+> [!WARNING]
+> 项目进度：
+> - [ ] 目前`概览页`,`错误监控`,`性能概览`,`SourceMap 管理`,功能仅开发完成静态页面，后端接口暂未开发
+> - [x] `错误采集演示`，触发的错误，可以使用sourcemap错误还原；rrweb类型可以查看录屏播放，stack类型可以查看用户行为栈展示。其他多余的按钮暂时无用。后续需要整合三条数据为一条，才可在一条内，使用3个按钮。
+
+![image](https://github.com/user-attachments/assets/3e7f950d-2409-4c4a-94e2-153a069c7246)
+
 
 ## 技术栈
 
